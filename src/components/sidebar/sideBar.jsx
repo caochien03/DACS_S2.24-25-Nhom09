@@ -15,6 +15,8 @@ import { Link, useNavigate } from "react-router";
 
 import HeaderComponent from "../header/header";
 import FooterComponent from "../footer/footer";
+import { UserContext } from "../../context/userContext";
+import { callLogout } from "../../services/api";
 
 const { Header, Sider, Content } = Layout;
 const SideBar = (props) => {
@@ -22,6 +24,19 @@ const SideBar = (props) => {
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+    const navigate = useNavigate();
+    const { user, logout } = useContext(UserContext);
+    const handleLogout = async () => {
+        const res = await callLogout();
+        if (res) {
+            logout();
+            message.success("Đăng xuất thành công");
+            localStorage.removeItem("access_token");
+            navigate("/login");
+        } else {
+            message.error(res.message);
+        }
+    };
 
     const currentPath = location.pathname.split("/")[1];
     return (
@@ -50,7 +65,7 @@ const SideBar = (props) => {
                                 fontSize: "20px",
                             }}
                         >
-                            Nguyễn Cao Chiến
+                            {user.name}
                         </span>
                         <Link to="/" />
                     </Menu.Item>
