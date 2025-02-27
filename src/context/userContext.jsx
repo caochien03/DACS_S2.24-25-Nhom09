@@ -1,5 +1,5 @@
 // src/context/UserContext.js
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 // Tạo context cho user
 export const UserContext = createContext();
@@ -7,6 +7,7 @@ export const UserContext = createContext();
 // Provider để bao bọc ứng dụng và cung cấp thông tin người dùng
 export const UserProvider = ({ children }) => {
     // Khởi tạo state từ localStorage nếu có
+
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : null;

@@ -8,6 +8,7 @@ import DashboardPage from "./pages/dashboard/dashboardPage";
 import SubjectPage from "./pages/subjects/subjectPage";
 import SideBar from "./components/sidebar/sideBar";
 import UserPage from "./pages/user/UserPage";
+import ProtectedRoute from "./components/protectedRoutes/ProtectedRoute";
 
 const Layout = () => {
     return (
@@ -21,11 +22,9 @@ const Layout = () => {
                 border: "2px solid #ffffff", // Thêm viền nếu cần
             }}
         >
-            {/* <Header /> */}
             <SideBar>
                 <Outlet />
             </SideBar>
-            {/* <Footer /> */}
         </div>
     );
 };
@@ -34,7 +33,11 @@ function App() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Layout />,
+            element: (
+                <ProtectedRoute>
+                    <Layout />
+                </ProtectedRoute>
+            ),
             children: [
                 { index: true, element: <DashboardPage /> },
                 {

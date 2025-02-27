@@ -7,8 +7,7 @@ const FooterComponent = () => {
                 // background: "rgba(0,32,109,0.85)",
             }}
         >
-            Team Nhom 3 - PTTKPM - {new Date().getFullYear()} || Created by CX
-            company
+            Team 09 - DACS - {new Date().getFullYear()} || Created by CX company
         </Footer>
     );
 };
