@@ -1,7 +1,9 @@
+import DepartmentTable from "../../components/departments/departmentTable";
+
 const DepartmentPage = () => {
     return (
         <>
-            <div>tuabn nnnnnn</div>
+            <DepartmentTable />
         </>
     );
 };

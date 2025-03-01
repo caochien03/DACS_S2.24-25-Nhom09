@@ -11,3 +11,21 @@ export const callLogin = (email, password) => {
 export const callLogout = () => {
     return axios.post("/api/auth/logout");
 };
+// department
+export const getAllDepartment = () => {
+    return axios.get("/api/departments/");
+};
+export const addNewDepartment = (code, name, manager) => {
+    return axios.post("/api/departments/", { code, name, manager });
+};
+export const updateDepartment = (id, code, name, manager) => {
+    const payload = { code, name };
+    if (manager) payload.manager = manager;
+    return axios.put(`/api/departments/${id}`, payload);
+};
+export const deleteDepartment = (id) => {
+    return axios.delete(`/api/departments/${id}`);
+};
+export const searchDepartments = (query) => {
+    return axios.get(`/api/departments/search?query=${query}`);
+};
