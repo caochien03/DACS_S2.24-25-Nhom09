@@ -1,7 +1,7 @@
 const DepartmentPage = () => {
     return (
         <>
-            <div>DepartmentPage</div>
+            <div>tuabn nnnnnn</div>
         </>
     );
 };
