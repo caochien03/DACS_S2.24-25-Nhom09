@@ -1,5 +1,4 @@
 import axios from "../utils/axios-customize";
-
 //auth
 
 export const callLogin = (email, password) => {
@@ -28,4 +27,20 @@ export const deleteDepartment = (id) => {
 };
 export const searchDepartments = (query) => {
     return axios.get(`/api/departments/search?query=${query}`);
+};
+// user
+export const getAvailableManagers = () => {
+    return axios.get("/api/users/managers/available");
+};
+export const getAllUsers = () => {
+    return axios.get("/api/users/");
+};
+export const addNewUser = (name, email, password, role, student) => {
+    return axios.post("/api/users/", {
+        name,
+        email,
+        password,
+        role,
+        student,
+    });
 };
