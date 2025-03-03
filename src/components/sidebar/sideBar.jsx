@@ -12,11 +12,12 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Button, Layout, Menu, message, Popconfirm, theme } from "antd";
 import { Link, useNavigate } from "react-router";
-
+import { callLogout } from "../../services/api";
+import { UserContext } from "../../context/userContext";
+import logo from "../../assets/phenikaa-logo.jpg";
+import avt from "../../assets/student-avt/male-avt.avif";
 import HeaderComponent from "../header/header";
 import FooterComponent from "../footer/footer";
-import { UserContext } from "../../context/userContext";
-import { callLogout } from "../../services/api";
 
 const { Header, Sider, Content } = Layout;
 const SideBar = (props) => {
@@ -31,13 +32,11 @@ const SideBar = (props) => {
         if (res) {
             logout();
             message.success("Đăng xuất thành công");
-            localStorage.removeItem("access_token");
             navigate("/login");
         } else {
             message.error(res.message);
         }
     };
-
     const currentPath = location.pathname.split("/")[1];
     return (
         <Layout>
@@ -57,7 +56,7 @@ const SideBar = (props) => {
                     style={{ backgroundColor: "transparent" }}
                 >
                     <Menu.Item className="sideBar-item avatar">
-                        <Avatar size={50} src="" />
+                        <Avatar size={50} src={avt} />
                         <span
                             style={{
                                 paddingLeft: "15px",
@@ -74,32 +73,68 @@ const SideBar = (props) => {
                         <span>Trang chủ</span>
                         <Link to="/" />
                     </Menu.Item>
-                    <Menu.Item key="/profile" className="sideBar-item">
-                        <ProfileOutlined />
-                        <span>Profile</span>
-                        <Link to="/profile" />
-                    </Menu.Item>
-                    <Menu.Item key="/departments" className="sideBar-item">
-                        <AppstoreOutlined />
-                        <span>Khoa</span>
-                        <Link to="/departments" />
-                    </Menu.Item>
-                    <Menu.Item key="/students" className="sideBar-item">
-                        <UserOutlined />
-                        <span>Sinh viên</span>
-                        <Link to="/students" />
-                    </Menu.Item>
 
-                    <Menu.Item key="/subjects" className="sideBar-item">
-                        <BookOutlined />
-                        <span>Môn học</span>
-                        <Link to="/subjects" />
-                    </Menu.Item>
-                    <Menu.Item key="/users" className="sideBar-item">
-                        <BookOutlined />
-                        <span>Tài khoản</span>
-                        <Link to="/users" />
-                    </Menu.Item>
+                    {user && user.role === "admin" && (
+                        <>
+                            <Menu.Item
+                                key="/departments"
+                                className="sideBar-item"
+                            >
+                                <AppstoreOutlined />
+                                <span>Khoa</span>
+                                <Link to="/departments" />
+                            </Menu.Item>
+                            <Menu.Item key="/students" className="sideBar-item">
+                                <UserOutlined />
+                                <span>Sinh viên</span>
+                                <Link to="/students" />
+                            </Menu.Item>
+
+                            <Menu.Item key="/subjects" className="sideBar-item">
+                                <BookOutlined />
+                                <span>Môn học</span>
+                                <Link to="/subjects" />
+                            </Menu.Item>
+                            <Menu.Item key="/users" className="sideBar-item">
+                                <BookOutlined />
+                                <span>Tài khoản</span>
+                                <Link to="/users" />
+                            </Menu.Item>
+                        </>
+                    )}
+
+                    {user && user.role === "manager" && (
+                        <>
+                            <Menu.Item key="/students" className="sideBar-item">
+                                <UserOutlined />
+                                <span>Sinh viên</span>
+                                <Link to="/students" />
+                            </Menu.Item>
+                            <Menu.Item key="/subjects" className="sideBar-item">
+                                <BookOutlined />
+                                <span>Môn học</span>
+                                <Link to="/subjects" />
+                            </Menu.Item>
+                        </>
+                    )}
+                    {user && user.role === "student" && (
+                        <>
+                            <Menu.Item key="/profile" className="sideBar-item">
+                                <ProfileOutlined />
+                                <span>Profile</span>
+                                <Link to="/profile" />
+                            </Menu.Item>
+                            <Menu.Item
+                                key="/registration"
+                                className="sideBar-item"
+                            >
+                                <BookOutlined />
+                                <span>đăng ký môn học</span>
+                                <Link to="/registration" />
+                            </Menu.Item>
+                        </>
+                    )}
+
                     <Menu.Item
                         key="6"
                         style={{
@@ -155,7 +190,7 @@ const SideBar = (props) => {
                             display: "flex",
                         }}
                     >
-                        <img src="" alt="" style={{ width: "180px" }} />
+                        <img src={logo} alt="" style={{ width: "180px" }} />
                     </div>
                     <HeaderComponent />
                 </Header>
