@@ -9,7 +9,7 @@ import SubjectPage from "./pages/subjects/subjectPage";
 import SideBar from "./components/sidebar/sideBar";
 import UserPage from "./pages/user/UserPage";
 import ProtectedRoute from "./components/protectedRoutes/ProtectedRoute";
-
+import "@ant-design/v5-patch-for-react-19";
 const Layout = () => {
     return (
         <div

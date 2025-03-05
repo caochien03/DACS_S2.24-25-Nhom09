@@ -1,9 +1,11 @@
+import UserTable from "../../components/user/UserTable";
+
 const UserPage = () => {
-    return (
-        <>
-            <div>UserPage</div>
-        </>
-    );
+  return (
+    <>
+      <UserTable />
+    </>
+  );
 };
 
 export default UserPage;
