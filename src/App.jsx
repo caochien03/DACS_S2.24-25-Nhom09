@@ -9,7 +9,11 @@ import SubjectPage from "./pages/subjects/subjectPage";
 import SideBar from "./components/sidebar/sideBar";
 import UserPage from "./pages/user/UserPage";
 import ProtectedRoute from "./components/protectedRoutes/ProtectedRoute";
+import ChangePassword from "./pages/changePassword/ChangePassWord";
+import StudentDetailPage from "./pages/students/studentDetailPage";
+
 import "@ant-design/v5-patch-for-react-19";
+import SubjectRegistration from "./pages/registration/SubjectRegistration";
 const Layout = () => {
     return (
         <div
@@ -44,7 +48,10 @@ function App() {
                     path: "/students",
                     element: <StudentPage />,
                 },
-
+                {
+                    path: "/students/:slug",
+                    element: <StudentDetailPage />,
+                },
                 {
                     path: "/departments",
                     element: <DepartmentPage />,
@@ -62,7 +69,15 @@ function App() {
                     path: "users",
                     element: <UserPage />,
                 },
+                {
+                    path: "registration",
+                    element: <SubjectRegistration />,
+                },
             ],
+        },
+        {
+            path: "/change-password",
+            element: <ChangePassword />,
         },
         {
             path: "/login",
