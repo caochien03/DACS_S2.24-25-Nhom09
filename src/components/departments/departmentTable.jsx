@@ -22,6 +22,7 @@ const DepartmentTable = () => {
         {
             title: "ID",
             dataIndex: "id",
+            hidden: true,
             render: (text) => <a>{text}</a>,
         },
         {
